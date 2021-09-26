@@ -1,3 +1,4 @@
+import MealItemForm from "./MealItemForm";
 import classes from "./MealItem.module.css";
 
 const MealItem = (props) => {
@@ -9,6 +10,7 @@ const MealItem = (props) => {
         <p className={classes.description}>{description}</p>
         <span className={classes.price}>${price.toFixed(2)}</span>
       </div>
+      <MealItemForm />
     </div>
   );
 };
