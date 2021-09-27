@@ -1,14 +1,19 @@
 import Modal from "../UI/Modal";
+import CartItem from "./CartItem";
 import classes from "./Cart.module.css";
+
 const Cart = (props) => {
   const cartItemsContent = [
     { id: "c1", name: "Sushi", price: 23.0, amount: 2 },
   ].map((item) => (
-    <li key={item.id}>
-      {item.name} - ${item.price}
-    </li>
+    <CartItem
+      key={item.id}
+      name={item.name}
+      price={item.price}
+      amount={item.amount}
+    />
   ));
-  
+
   return (
     <Modal>
       <ul className={classes["cart-items"]}>{cartItemsContent}</ul>
