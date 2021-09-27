@@ -1,9 +1,18 @@
+import { useRef } from "react";
+
 import Input from "../UI/Input";
 import classes from "./MealItemForm.module.css";
 
 const MealItemForm = (props) => {
+  const inputRef = useRef();
+
+  const submitFormHandler = (e) => {
+    e.preventDefault();
+    props.onSubmit(+inputRef.current.value)
+  };
+
   return (
-    <form className={classes.form}>
+    <form className={classes.form} onSubmit={submitFormHandler}>
       <Input
         label="Amount"
         input={{
@@ -14,6 +23,7 @@ const MealItemForm = (props) => {
           step: "1",
           defaultValue: "1",
         }}
+        ref={inputRef}
       />
       <button>+ Add</button>
     </form>
