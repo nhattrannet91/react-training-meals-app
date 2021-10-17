@@ -25,6 +25,10 @@ const Cart = (props) => {
     cartCtx.removeItem(itemId);
   };
 
+  const orderClickHandler = () => {
+    props.onOrderButtonClicked();
+  };
+
   const cartItemsContent = items.map((item) => (
     <CartItem
       key={item.id}
@@ -56,7 +60,9 @@ const Cart = (props) => {
         >
           Close
         </button>
-        <button type="button">Order</button>
+        <button type="button" onClick={orderClickHandler}>
+          Order
+        </button>
       </div>
     </Modal>
   );
