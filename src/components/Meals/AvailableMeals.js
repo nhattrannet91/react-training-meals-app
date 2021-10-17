@@ -2,33 +2,31 @@ import Card from "../UI/Card";
 import MealItem from "./MealItem";
 import classes from "./AvailableMeals.module.css";
 import { useEffect, useState } from "react";
+import useRequest from "../../hooks/use-request";
 
 const AvailableMeals = (props) => {
   const [meals, setMeals] = useState([]);
+  const { sendRequest } = useRequest();
 
-  const loadMeals = async () => {
-    try {
-      const response = await fetch(
-        "https://react-training-c36fe-default-rtdb.asia-southeast1.firebasedatabase.app/meals.json"
-      );
-
-      if(!response.ok){
-        throw new Error("Failed request");
-      }
-
-      const data = await response.json();
+  const loadMeals = () => {
+    const applyData = (data) => {
       const meals = [];
       for (const key in data) {
         meals.push({
           key,
-          ...data[key]
-        }) 
+          ...data[key],
+        });
       }
 
-      setMeals(meals)
-    } catch (e) {
-      console.log(e);
-    }
+      setMeals(meals);
+    };
+
+    sendRequest(
+      {
+        url: "https://react-training-c36fe-default-rtdb.asia-southeast1.firebasedatabase.app/meals.json",
+      },
+      applyData
+    );
   };
 
   useEffect(() => {
